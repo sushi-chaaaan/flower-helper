@@ -26,6 +26,16 @@
       "correctness": {
         "recommended": true,
         "noUnusedImports": "error"
+      },
+      "style": {
+        "recommended": true,
+        "useConsistentArrayType": {
+          "level": "warn",
+          "fix": "safe",
+          "options": {
+            "syntax": "shorthand"
+          }
+        }
       }
     }
   },

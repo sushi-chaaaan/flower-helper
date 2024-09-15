@@ -4,9 +4,6 @@
     "dev": {
       "persistent": true,
       "cache": false
-    },
-    "typecheck": {
-      "dependsOn": ["^typecheck"]
     }
   },
   "ui": "tui"

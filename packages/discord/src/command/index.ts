@@ -149,12 +149,12 @@ class DiscordCommand implements IDiscordCommand {
    *
    * @example
    * ```typescript
-   * import { describe, beforeEach } from "vitest";
+   * import { describe, afterEach } from "vitest";
    *
    * describe("DiscordCommand", () => {
    *  const discord = new DiscordCommand();
    *
-   *  beforeEach(() => {
+   *  afterEach(() => {
    *   discord.clear();
    *  });
    *

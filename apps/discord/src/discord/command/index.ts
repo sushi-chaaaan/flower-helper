@@ -1,12 +1,12 @@
 import type { ApplicationCommandType, RESTPutAPIApplicationCommandsJSONBody } from "discord-api-types/v10";
-import { pingCommand } from "./command/ping";
 import type {
   ApplicationCommand,
   ChatInputApplicationCommand,
   MessageApplicationCommand,
   PrimaryEntryPointApplicationCommand,
   UserApplicationCommand
-} from "./types/command";
+} from "../types/command";
+import { pingCommand } from "./ping";
 
 type CommandType = keyof typeof ApplicationCommandType;
 

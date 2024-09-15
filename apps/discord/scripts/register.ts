@@ -1,6 +1,6 @@
 import type { RESTPutAPIApplicationCommandsJSONBody } from "discord-api-types/v10";
 import { Result, err, fromPromise, ok } from "neverthrow";
-import { collectAllCommandPayloads } from "../src/discord/command";
+import { collectAllCommandPayloads } from "../src/discord/helper/command";
 import { validateRESTPutAPIApplicationCommandsJSONBody } from "../src/typia/generated/discord/RESTPutAPIApplicationCommandsJSONBody";
 
 const getRegisterEndpoint = (applicationId: string) => `https://discord.com/api/v10/applications/${applicationId}/commands`;

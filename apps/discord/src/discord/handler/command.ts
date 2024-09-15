@@ -1,6 +1,6 @@
 import { isChatInputApplicationCommandInteraction } from "discord-api-types/utils/v10";
-import type { APIApplicationCommandInteraction, APIInteractionResponsePong } from "discord-api-types/v10";
-import { findRegisteredCommandHandler } from "../command";
+import type { APIApplicationCommandInteraction } from "discord-api-types/v10";
+import { findRegisteredCommandHandler } from "../helper/command";
 import { isMessageApplicationCommandInteraction, isUserApplicationCommandInteraction } from "../helper/interaction/guard";
 import { pongHandler } from "../helper/interaction/response";
 

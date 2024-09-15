@@ -1,5 +1,11 @@
 name: check-packages-discord
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/discord/**'
+      - '.github/workflows/check-packages-discord.yml'
   pull_request:
     types:
       - opened

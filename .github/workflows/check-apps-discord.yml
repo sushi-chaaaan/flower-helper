@@ -1,5 +1,12 @@
 name: check-apps-discord
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/discord/**'
+      - 'packages/discord/**'
+      - '.github/workflows/check-apps-discord.yml'
   pull_request:
     types:
       - opened

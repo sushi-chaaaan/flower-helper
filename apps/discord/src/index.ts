@@ -1,4 +1,5 @@
 import { type APIInteraction, InteractionResponseType, InteractionType } from "discord-api-types/v10";
+import { interactionHandler } from "./discord";
 import { honoFactory } from "./lib/hono";
 import { verifyDiscordInteraction } from "./middleware/discord";
 
@@ -20,7 +21,7 @@ app.post("/interactions", verifyDiscordInteraction, async (c) => {
     return c.json({ type: InteractionResponseType.Pong });
   }
 
-  return c.json({ type: InteractionResponseType.Pong });
+  return c.json(interactionHandler(interaction));
 });
 
 // ここから下は fallback 的な Routing

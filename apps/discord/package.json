@@ -8,11 +8,13 @@
     "check": "biome check",
     "ci": "biome ci --reporter=github",
     "typecheck": "tsc --noEmit",
-    "codegen:cf": "wrangler types"
+    "codegen:cf": "wrangler types",
+    "register": "tsx --env-file=.dev.vars scripts/register.ts"
   },
   "dependencies": {
     "discord-interactions": "^4.1.0",
-    "hono": "^4.6.1"
+    "hono": "^4.6.1",
+    "neverthrow": "^8.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
@@ -21,6 +23,7 @@
     "@types/node": "20.10.1",
     "@virtual-live-lab/tsconfig": "^2.1.5",
     "discord-api-types": "^0.37.100",
+    "tsx": "^4.19.1",
     "typescript": "^5.6.2",
     "vitest": "^2.1.1",
     "wrangler": "^3.78.2"

@@ -1,12 +1,3 @@
 {
-  "extends": ["@virtual-live-lab/tsconfig/hono"],
-  "compilerOptions": {
-    "plugins": [
-      {
-        "transform": "typia/lib/transform"
-      }
-    ],
-    "strictNullChecks": true,
-    "strict": true
-  }
+  "extends": ["@virtual-live-lab/tsconfig/hono"]
 }

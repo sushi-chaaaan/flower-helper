@@ -2,8 +2,8 @@ name = "flower-helper-discord"
 compatibility_date = "2024-09-15"
 compatibility_flags = [ "nodejs_compat" ]
 
-# [vars]
-# MY_VAR = "my-variable"
+[vars]
+DISCORD_PUBLIC_KEY = ""
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"

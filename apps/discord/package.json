@@ -9,12 +9,15 @@
     "ci": "biome ci --reporter=github",
     "typecheck": "tsc --noEmit",
     "codegen:cf": "wrangler types",
-    "register": "tsx --env-file=.dev.vars scripts/register.ts"
+    "codegen:typia": "typia generate --input src/typia/templates --output src/typia/generated --project tsconfig.json",
+    "register": "dotenvx run -f .dev.vars -- tsx scripts/register.ts"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.14.1",
     "discord-interactions": "^4.1.0",
     "hono": "^4.6.1",
-    "neverthrow": "^8.0.0"
+    "neverthrow": "^8.0.0",
+    "typia": "^6.10.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
@@ -23,6 +26,7 @@
     "@types/node": "20.10.1",
     "@virtual-live-lab/tsconfig": "^2.1.5",
     "discord-api-types": "^0.37.100",
+    "ts-patch": "^3.2.1",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
     "vitest": "^2.1.1",

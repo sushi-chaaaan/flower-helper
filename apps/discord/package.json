@@ -1,0 +1,29 @@
+{
+  "name": "discord",
+  "scripts": {
+    "prepare": "ts-patch install && typia patch",
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "test": "vitest",
+    "check": "biome check",
+    "ci": "biome ci --reporter=github",
+    "typecheck": "tsc --noEmit",
+    "codegen:cf": "wrangler types",
+    "codegen:typia": "typia generate --input src/typia/templates --output src/typia/generated --project tsconfig.json"
+  },
+  "dependencies": {
+    "hono": "^4.6.1",
+    "typia": "^6.10.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@cloudflare/vitest-pool-workers": "^0.5.2",
+    "@cloudflare/workers-types": "^4.20240909.0",
+    "@types/node": "20.10.1",
+    "@virtual-live-lab/tsconfig": "^2.1.5",
+    "ts-patch": "^3.2.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1",
+    "wrangler": "^3.78.2"
+  }
+}

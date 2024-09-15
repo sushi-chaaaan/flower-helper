@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices"
+  ],
+  "timezone": "Asia/Tokyo",
+  "enabledManagers": [
+    "github-actions",
+    "npm"
+  ],
+  "separateMajorMinor": true,
+  "schedule": "before 2pm on Tuesday",
+  "automerge": false,
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "groupName": "vitest",
+      "matchPackageNames": [
+        "vitest**",
+        "@vitest/**",
+        "@cloudflare/vitest-pool-workers"
+      ]
+    },
+    {
+      "groupName": "Cloudflare Workers",
+      "matchPackageNames": [
+        "@cloudflare/workers-types",
+        "wrangler"
+      ]
+    },
+    {
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ],
+      "groupName": "minor and patch dependencies",
+      "matchPackageNames": [
+        "!typescript"
+      ]
+    }
+  ]
+}

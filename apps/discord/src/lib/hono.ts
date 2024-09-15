@@ -25,4 +25,3 @@ const honoFactory = createFactory<HonoConfig>({
 });
 
 export { honoFactory };
-export type { HonoConfig };

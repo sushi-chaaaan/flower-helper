@@ -1,6 +1,6 @@
 import type { RESTPutAPIApplicationCommandsJSONBody } from "discord-api-types/v10";
 import { Result, err, fromPromise, ok } from "neverthrow";
-import { COMMANDS } from "../src/discord/commands";
+import { collectAllCommandPayloads } from "../src/discord/commands";
 import { validateRESTPutAPIApplicationCommandsJSONBody } from "../src/typia/generated/discord/RESTPutAPIApplicationCommandsJSONBody";
 
 const getRegisterEndpoint = (applicationId: string) => `https://discord.com/api/v10/applications/${applicationId}/commands`;
@@ -18,8 +18,8 @@ const validateToken = () => {
   return ok(token);
 };
 
-const validateCommands = (input: unknown) => {
-  const res = validateRESTPutAPIApplicationCommandsJSONBody(input);
+const validateCommandPayloads = (payloads: unknown[]) => {
+  const res = validateRESTPutAPIApplicationCommandsJSONBody(payloads);
   if (res.success) return ok(res.data);
   return err(res.errors);
 };
@@ -38,7 +38,9 @@ const registerCommands = (input: RegisterCommandInput) =>
   );
 
 const main = () => {
-  Result.combineWithAllErrors([validateToken(), validateCommands(COMMANDS)])
+  const commandPayloads = collectAllCommandPayloads();
+
+  Result.combineWithAllErrors([validateToken(), validateCommandPayloads(commandPayloads)])
     .mapErr((e) => {
       console.error(e.join("\n"));
       process.exit(1);

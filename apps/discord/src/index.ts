@@ -1,33 +1,35 @@
-import { type APIInteraction, InteractionResponseType, InteractionType } from "discord-api-types/v10";
-import { interactionHandler } from "./discord";
+import { type APIInteraction, InteractionType } from "discord-api-types/v10";
+import { HTTPException } from "hono/http-exception";
+import { handleInteraction } from "./discord/handler";
+import { INTERACTION_RESPONSE_PONG } from "./discord/helper/interaction/response";
 import { honoFactory } from "./lib/hono";
 import { verifyDiscordInteraction } from "./middleware/discord";
 
-const app = honoFactory.createApp();
+const app = honoFactory
+  .createApp()
+  .onError((e, c) => {
+    if (e instanceof HTTPException) {
+      return e.getResponse();
+    }
 
-app.get("/", (c) => {
-  return c.text("Hello, World!");
-});
-
-app.get("/hello-world", (c) => {
-  const requestId = c.get("requestId");
-  return c.text(`Hello, World! Request ID: ${requestId}`);
-});
+    const requestId = c.get("requestId");
+    console.error(`app.onError: ${e.message} (requestId: ${requestId})`);
+    return c.text("Internal Server Error", 500, { "X-Request-Id": requestId });
+  })
+  .get("/", (c) => {
+    const requestId = c.get("requestId");
+    return c.text("Hello, World!", 200, { "X-Request-Id": requestId });
+  });
 
 app.post("/interactions", verifyDiscordInteraction, async (c) => {
   const interaction = await c.req.json<APIInteraction>();
 
   if (interaction.type === InteractionType.Ping) {
-    return c.json({ type: InteractionResponseType.Pong });
+    return c.json(INTERACTION_RESPONSE_PONG);
   }
 
-  return c.json(interactionHandler(interaction));
-});
-
-// ここから下は fallback 的な Routing
-app.onError((e, c) => {
-  console.error(e);
-  return c.text("Internal Server Error", 500);
+  const response = await handleInteraction(interaction);
+  return c.json(response);
 });
 
 export default app;

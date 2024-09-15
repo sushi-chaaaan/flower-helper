@@ -69,7 +69,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
                 return $io27(input);
             return false;
         })();
-})(); const $vo0 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.type || 1 === input.type || $report(_exceptionable, {
+})(); const $vo0 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.type || 1 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "(1 | undefined)",
         value: input.type
@@ -157,7 +157,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".integration_types",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<ApplicationIntegrationType>> | undefined)",
         value: input.integration_types
-    })].every((flag: boolean) => flag); const $vo1 = (input: any, _path: string, _exceptionable = true): boolean => [null === input.id || undefined === input.id || "string" === typeof input.id || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo1 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [null === input.id || undefined === input.id || "string" === typeof input.id || $report(_exceptionable, {
         path: _path + ".id",
         expected: "(null | string | undefined)",
         value: input.id
@@ -285,7 +285,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".vi",
         expected: "(null | string | undefined)",
         value: input.vi
-    })].every((flag: boolean) => flag); const $vo2 = (input: any, _path: string, _exceptionable = true): boolean => [11 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo2 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [11 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "11",
         value: input.type
@@ -317,7 +317,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo3 = (input: any, _path: string, _exceptionable = true): boolean => [5 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo3 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [5 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "5",
         value: input.type
@@ -349,7 +349,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo4 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.channel_types || (Array.isArray(input.channel_types) || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo4 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.channel_types || (Array.isArray(input.channel_types) || $report(_exceptionable, {
         path: _path + ".channel_types",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<ChannelType.GuildText | ChannelType.GuildVoice | ChannelType.GuildCategory | ChannelType.GuildAnnouncement | ChannelType.AnnouncementThread | ChannelType.PublicThread | ChannelType.PrivateThread | ChannelType.GuildStageVoice | ChannelType.GuildDirectory | ChannelType.GuildForum | ChannelType.GuildMedia>> | undefined)",
         value: input.channel_types
@@ -393,7 +393,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo5 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo5 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
         path: _path + ".min_value",
         expected: "(number | undefined)",
         value: input.min_value
@@ -449,7 +449,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "([] | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo6 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo6 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
         path: _path + ".min_value",
         expected: "(number | undefined)",
         value: input.min_value
@@ -509,7 +509,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandOptionChoice<number>>> | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo7 = (input: any, _path: string, _exceptionable = true): boolean => ["string" === typeof input.name || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo7 = (input: any, _path: string, _exceptionable: boolean = true): boolean => ["string" === typeof input.name || $report(_exceptionable, {
         path: _path + ".name",
         expected: "string",
         value: input.name
@@ -525,7 +525,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".value",
         expected: "number",
         value: input.value
-    })].every((flag: boolean) => flag); const $vo8 = (input: any, _path: string, _exceptionable = true): boolean => [9 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo8 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [9 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "9",
         value: input.type
@@ -557,7 +557,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo9 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo9 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
         path: _path + ".min_value",
         expected: "(number | undefined)",
         value: input.min_value
@@ -613,7 +613,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "([] | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo10 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo10 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
         path: _path + ".min_value",
         expected: "(number | undefined)",
         value: input.min_value
@@ -673,7 +673,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandOptionChoice<number>>> | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo11 = (input: any, _path: string, _exceptionable = true): boolean => [8 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo11 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [8 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "8",
         value: input.type
@@ -705,7 +705,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo12 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_length || "number" === typeof input.min_length || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo12 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_length || "number" === typeof input.min_length || $report(_exceptionable, {
         path: _path + ".min_length",
         expected: "(number | undefined)",
         value: input.min_length
@@ -761,7 +761,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "([] | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo13 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_length || "number" === typeof input.min_length || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo13 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_length || "number" === typeof input.min_length || $report(_exceptionable, {
         path: _path + ".min_length",
         expected: "(number | undefined)",
         value: input.min_length
@@ -821,7 +821,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandOptionChoice<string>>> | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo14 = (input: any, _path: string, _exceptionable = true): boolean => ["string" === typeof input.name || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo14 = (input: any, _path: string, _exceptionable: boolean = true): boolean => ["string" === typeof input.name || $report(_exceptionable, {
         path: _path + ".name",
         expected: "string",
         value: input.name
@@ -837,7 +837,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".value",
         expected: "string",
         value: input.value
-    })].every((flag: boolean) => flag); const $vo15 = (input: any, _path: string, _exceptionable = true): boolean => [6 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo15 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [6 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "6",
         value: input.type
@@ -869,7 +869,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo16 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.options || (Array.isArray(input.options) || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo16 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.options || (Array.isArray(input.options) || $report(_exceptionable, {
         path: _path + ".options",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandSubcommandOption>> | undefined)",
         value: input.options
@@ -917,7 +917,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo17 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.options || (Array.isArray(input.options) || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo17 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.options || (Array.isArray(input.options) || $report(_exceptionable, {
         path: _path + ".options",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandBasicOption>> | undefined)",
         value: input.options
@@ -965,7 +965,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo18 = (input: any, _path: string, _exceptionable = true): boolean => [11 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo18 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [11 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "11",
         value: input.type
@@ -997,7 +997,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo19 = (input: any, _path: string, _exceptionable = true): boolean => [5 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo19 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [5 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "5",
         value: input.type
@@ -1029,7 +1029,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo20 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.channel_types || (Array.isArray(input.channel_types) || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo20 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.channel_types || (Array.isArray(input.channel_types) || $report(_exceptionable, {
         path: _path + ".channel_types",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<ChannelType.GuildText | ChannelType.GuildVoice | ChannelType.GuildCategory | ChannelType.GuildAnnouncement | ChannelType.AnnouncementThread | ChannelType.PublicThread | ChannelType.PrivateThread | ChannelType.GuildStageVoice | ChannelType.GuildDirectory | ChannelType.GuildForum | ChannelType.GuildMedia>> | undefined)",
         value: input.channel_types
@@ -1073,7 +1073,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo21 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo21 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
         path: _path + ".min_value",
         expected: "(number | undefined)",
         value: input.min_value
@@ -1129,7 +1129,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "([] | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo22 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo22 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
         path: _path + ".min_value",
         expected: "(number | undefined)",
         value: input.min_value
@@ -1189,7 +1189,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandOptionChoice<number>>> | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo23 = (input: any, _path: string, _exceptionable = true): boolean => [9 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo23 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [9 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "9",
         value: input.type
@@ -1221,7 +1221,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo24 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo24 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
         path: _path + ".min_value",
         expected: "(number | undefined)",
         value: input.min_value
@@ -1277,7 +1277,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "([] | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo25 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo25 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_value || "number" === typeof input.min_value || $report(_exceptionable, {
         path: _path + ".min_value",
         expected: "(number | undefined)",
         value: input.min_value
@@ -1337,7 +1337,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandOptionChoice<number>>> | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo26 = (input: any, _path: string, _exceptionable = true): boolean => [8 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo26 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [8 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "8",
         value: input.type
@@ -1369,7 +1369,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo27 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_length || "number" === typeof input.min_length || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo27 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_length || "number" === typeof input.min_length || $report(_exceptionable, {
         path: _path + ".min_length",
         expected: "(number | undefined)",
         value: input.min_length
@@ -1425,7 +1425,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "([] | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo28 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.min_length || "number" === typeof input.min_length || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo28 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.min_length || "number" === typeof input.min_length || $report(_exceptionable, {
         path: _path + ".min_length",
         expected: "(number | undefined)",
         value: input.min_length
@@ -1485,7 +1485,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".choices",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandOptionChoice<string>>> | undefined)",
         value: input.choices
-    })].every((flag: boolean) => flag); const $vo29 = (input: any, _path: string, _exceptionable = true): boolean => [6 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo29 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [6 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "6",
         value: input.type
@@ -1517,7 +1517,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo30 = (input: any, _path: string, _exceptionable = true): boolean => [undefined === input.options || (Array.isArray(input.options) || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo30 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [undefined === input.options || (Array.isArray(input.options) || $report(_exceptionable, {
         path: _path + ".options",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<APIApplicationCommandBasicOption>> | undefined)",
         value: input.options
@@ -1565,7 +1565,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".required",
         expected: "(boolean | undefined)",
         value: input.required
-    })].every((flag: boolean) => flag); const $vo31 = (input: any, _path: string, _exceptionable = true): boolean => [2 === input.type || 3 === input.type || $report(_exceptionable, {
+    })].every((flag: boolean) => flag); const $vo31 = (input: any, _path: string, _exceptionable: boolean = true): boolean => [2 === input.type || 3 === input.type || $report(_exceptionable, {
         path: _path + ".type",
         expected: "(2 | 3)",
         value: input.type
@@ -1649,7 +1649,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         path: _path + ".integration_types",
         expected: "(Array<AddUndefinedToPossiblyUndefinedPropertiesOfInterface<ApplicationIntegrationType>> | undefined)",
         value: input.integration_types
-    })].every((flag: boolean) => flag); const $vu0 = (input: any, _path: string, _exceptionable = true): any => (() => {
+    })].every((flag: boolean) => flag); const $vu0 = (input: any, _path: string, _exceptionable: boolean = true): any => (() => {
     if (undefined !== input.description)
         return $vo0(input, _path, true && _exceptionable);
     else if (2 === input.type || 3 === input.type)
@@ -1660,7 +1660,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
             expected: "(RESTPostAPIChatInputApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody)",
             value: input
         });
-})(); const $vu1 = (input: any, _path: string, _exceptionable = true): any => (() => {
+})(); const $vu1 = (input: any, _path: string, _exceptionable: boolean = true): any => (() => {
     if (5 === input.type)
         return $vo3(input, _path, true && _exceptionable);
     else if (11 === input.type)
@@ -1679,7 +1679,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
         return $vo16(input, _path, true && _exceptionable);
     else
         return $vo10(input, _path, false && _exceptionable) || $vo9(input, _path, false && _exceptionable) || $vo6(input, _path, false && _exceptionable) || $vo5(input, _path, false && _exceptionable) || $vo13(input, _path, false && _exceptionable) || $vo12(input, _path, false && _exceptionable);
-})(); const $vu2 = (input: any, _path: string, _exceptionable = true): any => (() => {
+})(); const $vu2 = (input: any, _path: string, _exceptionable: boolean = true): any => (() => {
     if (5 === input.type)
         return $vo19(input, _path, true && _exceptionable);
     else if (11 === input.type)
@@ -1698,7 +1698,7 @@ const validateRESTPutAPIApplicationCommandsJSONBody = (() => { const $iv6 = new 
     if (false === __is(input)) {
         errors = [];
         $report = (typia.createValidate as any).report(errors);
-        ((input: any, _path: string, _exceptionable = true) => (Array.isArray(input) || $report(true, {
+        ((input: any, _path: string, _exceptionable: boolean = true) => (Array.isArray(input) || $report(true, {
             path: _path + "",
             expected: "RESTPutAPIApplicationCommandsJSONBody",
             value: input

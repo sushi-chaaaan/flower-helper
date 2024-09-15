@@ -5,11 +5,14 @@
     "dev": "turbo dev",
     "check": "pnpm run /^check:.*/",
     "check:discord": "pnpm --filter discord run check",
+    "check:discord-lib": "pnpm --filter @repo/discord run check",
     "typecheck": "turbo typecheck",
     "ci": "pnpm run /^ci:.*/",
     "ci:discord": "pnpm --filter discord run ci",
+    "ci:discord-lib": "pnpm --filter @repo/discord run ci",
     "test": "vitest",
     "test:discord": "vitest --project discord",
+    "test:discord-lib": "vitest --project @repo/discord",
     "coverage": "vitest run --coverage"
   },
   "devDependencies": {

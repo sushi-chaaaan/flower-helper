@@ -35,6 +35,9 @@ importers:
       '@dotenvx/dotenvx':
         specifier: ^1.14.1
         version: 1.14.1
+      '@repo/discord':
+        specifier: workspace:^
+        version: link:../../packages/discord
       discord-api-types:
         specifier: ^0.37.100
         version: 0.37.100
@@ -78,6 +81,34 @@ importers:
       wrangler:
         specifier: ^3.78.2
         version: 3.78.2(@cloudflare/workers-types@4.20240909.0)
+
+  packages/discord:
+    dependencies:
+      '@discordjs/builders':
+        specifier: ^1.9.0
+        version: 1.9.0
+      discord-api-types:
+        specifier: ^0.37.100
+        version: 0.37.100
+      discord-interactions:
+        specifier: ^4.1.0
+        version: 4.1.0
+      neverthrow:
+        specifier: ^8.0.0
+        version: 8.0.0
+    devDependencies:
+      '@biomejs/biome':
+        specifier: 1.8.3
+        version: 1.8.3
+      '@virtual-live-lab/tsconfig':
+        specifier: ^2.1.5
+        version: 2.1.5(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2)
+      typescript:
+        specifier: ^5.6.2
+        version: 5.6.2
+      vitest:
+        specifier: ^2.1.1
+        version: 2.1.1(@types/node@20.10.1)
 
 packages:
 

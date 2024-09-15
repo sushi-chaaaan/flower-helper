@@ -2,5 +2,5 @@
 // by running `wrangler types`
 
 interface Env {
-	DISCORD_PUBLIC_KEY: "";
+	DISCORD_PUBLIC_KEY: string;
 }

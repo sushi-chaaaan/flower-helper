@@ -15,6 +15,7 @@
   "dependencies": {
     "@discordjs/builders": "^1.9.0",
     "@dotenvx/dotenvx": "^1.14.1",
+    "@repo/discord": "workspace:^",
     "discord-api-types": "^0.37.100",
     "discord-interactions": "^4.1.0",
     "hono": "^4.6.1",

@@ -1,0 +1,29 @@
+{
+  "name": "@repo/discord",
+  "version": "1.0.0",
+  "description": "",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest",
+    "check": "biome check",
+    "ci": "biome ci --reporter=github",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^1.9.0",
+    "discord-api-types": "^0.37.100",
+    "discord-interactions": "^4.1.0",
+    "neverthrow": "^8.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@virtual-live-lab/tsconfig": "^2.1.5",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  }
+}

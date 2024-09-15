@@ -1,7 +1,6 @@
-import { type APIInteraction, InteractionType } from "discord-api-types/v10";
+import type { APIInteraction } from "discord-api-types/v10";
 import { HTTPException } from "hono/http-exception";
-import { handleInteraction } from "./discord/handler";
-import { INTERACTION_RESPONSE_PONG } from "./discord/helper/interaction/response";
+import { discordInteractionApp } from "./discord";
 import { honoFactory } from "./lib/hono";
 import { verifyDiscordInteraction } from "./middleware/discord";
 
@@ -23,11 +22,7 @@ const app = honoFactory
 app.post("/interactions", verifyDiscordInteraction, async (c) => {
   const interaction = await c.req.json<APIInteraction>();
 
-  if (interaction.type === InteractionType.Ping) {
-    return c.json(INTERACTION_RESPONSE_PONG);
-  }
-
-  const response = await handleInteraction(interaction);
+  const response = await discordInteractionApp.handleInteraction(interaction);
   return c.json(response);
 });
 

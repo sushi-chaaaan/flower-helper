@@ -1,4 +1,5 @@
 import type { ApplicationCommandType, RESTPutAPIApplicationCommandsJSONBody } from "discord-api-types/v10";
+import { pingCommand } from "./command/ping";
 import type {
   ApplicationCommand,
   ChatInputApplicationCommand,
@@ -17,7 +18,9 @@ type Commands = {
 };
 
 const REGISTERED_COMMANDS = {
-  ChatInput: {},
+  ChatInput: {
+    ping: pingCommand
+  },
   Message: {},
   User: {},
   PrimaryEntryPoint: {}

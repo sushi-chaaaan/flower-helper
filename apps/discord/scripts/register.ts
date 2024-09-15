@@ -13,8 +13,8 @@ type RegisterCommandInput = {
 
 const validateToken = () => {
   // biome-ignore lint/complexity/useLiteralKeys: <explanation>
-  const token = process.env["DISCORD_PUBLIC_KEY"];
-  if (token == null || token === "") return err("DISCORD_PUBLIC_KEY is not set.");
+  const token = process.env["DISCORD_BOT_TOKEN"];
+  if (token == null || token === "") return err("DISCORD_BOT_TOKEN is not set.");
   return ok(token);
 };
 

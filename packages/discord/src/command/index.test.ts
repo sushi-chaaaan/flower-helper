@@ -35,21 +35,21 @@ describe("DiscordCommand", () => {
 
   it("ChatInputApplicationCommand を登録できる", () => {
     const handler = vi.fn();
-    discord.command("ChatInput", "test", (b) => b.setName("test").setDescription("A"), handler);
+    discord.command("ChatInput", { name: "test", description: "I AM DESCRIPTION" }, (b) => b, handler);
 
     // コマンドPayloadの生成にはSlashCommandBuilderが使われる
     expect(slashBuilderSpy).toHaveBeenCalledOnce();
 
     expect(discord.getChatInputCommandMap().get("test")?.payload).toMatchObject({
       type: ApplicationCommandType.ChatInput,
-      description: "A",
+      description: "I AM DESCRIPTION",
       name: "test"
     } satisfies RESTPostAPIApplicationCommandsJSONBody);
   });
 
   it("MessageContextMenuApplicationCommand を登録できる", () => {
     const handler = vi.fn();
-    discord.command("Message", "test", (b) => b.setName("test"), handler);
+    discord.command("Message", { name: "test" }, (b) => b, handler);
 
     // コマンドPayloadの生成にはContextMenuCommandBuilderが使われる
     expect(messageBuilderSpy).toHaveBeenCalledOnce();
@@ -62,7 +62,7 @@ describe("DiscordCommand", () => {
 
   it("UserContextMenuApplicationCommand を登録できる", () => {
     const handler = vi.fn();
-    discord.command("User", "test", (b) => b.setName("test"), handler);
+    discord.command("User", { name: "test" }, (b) => b, handler);
 
     // コマンドPayloadの生成にはContextMenuCommandBuilderが使われる
     expect(userBuilderSpy).toHaveBeenCalledOnce();
@@ -70,14 +70,12 @@ describe("DiscordCommand", () => {
     expect(discord.getUserCommandMap().get("test")?.payload).toMatchObject({
       type: ApplicationCommandType.User,
       name: "test"
-    } satisfies RESTPostAPIApplicationCommandsJSONBody);
+    });
   });
 
   it("任意のコマンドを2つ以上登録できる", () => {
     const handler = vi.fn();
-    discord
-      .command("ChatInput", "test", (b) => b.setName("test").setDescription("AA"), handler)
-      .command("User", "test2", (b) => b.setName("test2"), handler);
+    discord.command("ChatInput", { name: "test", description: "AA" }, (b) => b, handler).command("User", { name: "test2" }, (b) => b, handler);
 
     expect(slashBuilderSpy).toHaveBeenCalledOnce();
     expect(userBuilderSpy).toHaveBeenCalledOnce();
@@ -86,17 +84,17 @@ describe("DiscordCommand", () => {
       type: ApplicationCommandType.ChatInput,
       description: "AA",
       name: "test"
-    } satisfies RESTPostAPIApplicationCommandsJSONBody);
+    });
 
     expect(discord.getUserCommandMap().get("test2")?.payload).toMatchObject({
       type: ApplicationCommandType.User,
       name: "test2"
-    } satisfies RESTPostAPIApplicationCommandsJSONBody);
+    });
   });
 
   it("getRegisterObject() で登録したコマンドを取得できる", () => {
     const handler = vi.fn();
-    discord.command("ChatInput", "test", (b) => b.setName("test").setDescription("AA"), handler);
+    discord.command("ChatInput", { name: "test", description: "AA" }, (b) => b, handler);
 
     const registerObject = discord.getRegisterObject();
     expect(registerObject.global).toEqual([
@@ -115,5 +113,30 @@ describe("DiscordCommand", () => {
         options: []
       } satisfies RESTPostAPIApplicationCommandsJSONBody
     ]);
+  });
+
+  it("任意のコマンド登録において第3引数のbodyは省略可能である", () => {
+    const handler = vi.fn();
+    discord
+      .command("ChatInput", { name: "test", description: "AA" }, handler)
+      .command("Message", { name: "test2" }, handler)
+      .command("User", { name: "test3" }, handler);
+
+    expect(slashBuilderSpy).toHaveBeenCalledOnce();
+    expect(userBuilderSpy).toHaveBeenCalledOnce();
+    expect(messageBuilderSpy).toHaveBeenCalledOnce();
+    expect(discord.getChatInputCommandMap().get("test")?.payload).toMatchObject({
+      type: ApplicationCommandType.ChatInput,
+      description: "AA",
+      name: "test"
+    });
+    expect(discord.getMessageCommandMap().get("test2")?.payload).toMatchObject({
+      type: ApplicationCommandType.Message,
+      name: "test2"
+    });
+    expect(discord.getUserCommandMap().get("test3")?.payload).toMatchObject({
+      type: ApplicationCommandType.User,
+      name: "test3"
+    });
   });
 });

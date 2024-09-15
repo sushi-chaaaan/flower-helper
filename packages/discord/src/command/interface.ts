@@ -6,6 +6,7 @@ import type {
   APIUserApplicationCommandInteraction,
   RESTPutAPIApplicationCommandsJSONBody
 } from "discord-api-types/v10";
+import type { MessageContextMenuCommandBuilderArgs, SlashCommandBuilderArgs, UserContextMenuCommandBuilderArgs } from "../builder/command";
 import type {} from "../helper/interaction/types";
 import type { CommandType } from "../types/command";
 import type { MaybePromise } from "../utils/types/promise";
@@ -17,32 +18,51 @@ export type ApplicationCommandRegisterObject = {
 export interface IDiscordCommand {
   command(
     type: "ChatInput",
-    name: string,
+    params: SlashCommandBuilderArgs,
     body: (builder: SlashCommandBuilder) => SlashCommandBuilder,
     handler: (interaction: APIChatInputApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
   ): this;
 
   command(
+    type: "ChatInput",
+    params: SlashCommandBuilderArgs,
+    handler: (interaction: APIChatInputApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
+  ): this;
+
+  command(
     type: "Message",
-    name: string,
+    params: MessageContextMenuCommandBuilderArgs,
     body: (builder: ContextMenuCommandBuilder) => ContextMenuCommandBuilder,
     handler: (interaction: APIMessageApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
   ): this;
 
   command(
+    type: "Message",
+    params: MessageContextMenuCommandBuilderArgs,
+    handler: (interaction: APIMessageApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
+  ): this;
+
+  command(
     type: "User",
-    name: string,
+    params: UserContextMenuCommandBuilderArgs,
     body: (builder: ContextMenuCommandBuilder) => ContextMenuCommandBuilder,
     handler: (interaction: APIUserApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
   ): this;
 
   command(
+    type: "User",
+    params: UserContextMenuCommandBuilderArgs,
+    handler: (interaction: APIUserApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
+  ): this;
+
+  command(
     type: CommandType,
-    name: string,
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    body: (builder: any) => any,
+    params: any,
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    handler: (interaction: any) => Awaited<any>
+    bodyOrHandler: (builder: any) => any,
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    handler?: (interaction: any) => Awaited<any>
   ): this;
 
   getRegisterObject(): ApplicationCommandRegisterObject;

@@ -3,7 +3,6 @@ import { type APIInteractionResponseChannelMessageWithSource, MessageFlags } fro
 
 export const discordInteractionApp = new Discord().command(
   "ChatInput",
-  "ping",
-  (b) => b.setName("ping").setDescription("Ping!"),
+  { name: "ping", description: "ping pong" },
   () => ({ type: 4, data: { content: "pong!", flags: MessageFlags.Ephemeral } }) satisfies APIInteractionResponseChannelMessageWithSource
 );

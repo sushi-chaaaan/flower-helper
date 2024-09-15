@@ -7,7 +7,14 @@ import type {
   APIMessageApplicationCommandInteraction,
   APIUserApplicationCommandInteraction
 } from "discord-api-types/v10";
-import { getMessageContextMenuCommandBuilder, getSlashCommandBuilder, getUserContextMenuCommandBuilder } from "../builder/command";
+import {
+  type MessageContextMenuCommandBuilderArgs,
+  type SlashCommandBuilderArgs,
+  type UserContextMenuCommandBuilderArgs,
+  getMessageContextMenuCommandBuilder,
+  getSlashCommandBuilder,
+  getUserContextMenuCommandBuilder
+} from "../builder/command";
 import { isMessageApplicationCommandInteraction, isUserApplicationCommandInteraction } from "../helper/interaction/guard";
 import type {} from "../helper/interaction/types";
 import type { ChatInputApplicationCommand, CommandType, MessageApplicationCommand, UserApplicationCommand } from "../types/command";
@@ -27,55 +34,77 @@ class DiscordCommand implements IDiscordCommand {
 
   command(
     type: "ChatInput",
-    name: string,
+    params: SlashCommandBuilderArgs,
     body: (builder: SlashCommandBuilder) => SlashCommandBuilder,
     handler: (interaction: APIChatInputApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
   ): this;
 
   command(
+    type: "ChatInput",
+    params: SlashCommandBuilderArgs,
+    handler: (interaction: APIChatInputApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
+  ): this;
+
+  command(
     type: "Message",
-    name: string,
+    params: MessageContextMenuCommandBuilderArgs,
     body: (builder: ContextMenuCommandBuilder) => ContextMenuCommandBuilder,
     handler: (interaction: APIMessageApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
   ): this;
 
   command(
+    type: "Message",
+    params: MessageContextMenuCommandBuilderArgs,
+    handler: (interaction: APIMessageApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
+  ): this;
+
+  command(
     type: "User",
-    name: string,
+    params: UserContextMenuCommandBuilderArgs,
     body: (builder: ContextMenuCommandBuilder) => ContextMenuCommandBuilder,
     handler: (interaction: APIUserApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
   ): this;
 
   command(
+    type: "User",
+    params: UserContextMenuCommandBuilderArgs,
+    handler: (interaction: APIUserApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
+  ): this;
+
+  command(
     type: CommandType,
-    name: string,
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    body: (builder: any) => any,
+    params: any,
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    handler: (interaction: any) => MaybePromise<any>
+    bodyOrHandler: (builder: any) => any,
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    handler?: (interaction: any) => Awaited<any>
   ): this {
     switch (type) {
       case "ChatInput": {
-        const payload = body(getSlashCommandBuilder()).toJSON();
-        this.chatInputCommandMap.set(name, {
+        const builder = getSlashCommandBuilder(params);
+        const payload = handler ? bodyOrHandler(builder).toJSON() : builder.toJSON();
+        this.chatInputCommandMap.set(params.name, {
           payload,
-          handler
+          handler: handler ?? bodyOrHandler
         });
         return this;
       }
       case "Message": {
-        const payload = body(getMessageContextMenuCommandBuilder()).toJSON();
-        this.messageCommandMap.set(name, {
+        const builder = getMessageContextMenuCommandBuilder(params);
+        const payload = handler ? bodyOrHandler(builder).toJSON() : builder.toJSON();
+        this.messageCommandMap.set(params.name, {
           payload,
-          handler
+          handler: handler ?? bodyOrHandler
         });
         return this;
       }
       case "User": {
-        const payload = body(getUserContextMenuCommandBuilder()).toJSON();
-        this.userCommandMap.set(name, {
+        const builder = getUserContextMenuCommandBuilder(params);
+        const payload = handler ? bodyOrHandler(builder).toJSON() : builder.toJSON();
+        this.userCommandMap.set(params.name, {
           payload,
-          handler
+          handler: handler ?? bodyOrHandler
         });
         return this;
       }

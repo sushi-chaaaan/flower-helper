@@ -33,7 +33,7 @@ describe("DiscordCommand", () => {
     discord.clear();
   });
 
-  it("ChatInputなApplication Commandを登録できる", () => {
+  it("ChatInputApplicationCommand を登録できる", () => {
     const handler = vi.fn();
     discord.command("ChatInput", "test", (b) => b.setName("test").setDescription("A"), handler);
 
@@ -47,7 +47,7 @@ describe("DiscordCommand", () => {
     } satisfies RESTPostAPIApplicationCommandsJSONBody);
   });
 
-  it("MessageなContextMenu Application Commandを登録できる", () => {
+  it("MessageContextMenuApplicationCommand を登録できる", () => {
     const handler = vi.fn();
     discord.command("Message", "test", (b) => b.setName("test"), handler);
 
@@ -60,7 +60,7 @@ describe("DiscordCommand", () => {
     } satisfies RESTPostAPIApplicationCommandsJSONBody);
   });
 
-  it("UserなContextMenu Application Commandを登録できる", () => {
+  it("UserContextMenuApplicationCommand を登録できる", () => {
     const handler = vi.fn();
     discord.command("User", "test", (b) => b.setName("test"), handler);
 
@@ -71,5 +71,49 @@ describe("DiscordCommand", () => {
       type: ApplicationCommandType.User,
       name: "test"
     } satisfies RESTPostAPIApplicationCommandsJSONBody);
+  });
+
+  it("任意のコマンドを2つ以上登録できる", () => {
+    const handler = vi.fn();
+    discord
+      .command("ChatInput", "test", (b) => b.setName("test").setDescription("AA"), handler)
+      .command("User", "test2", (b) => b.setName("test2"), handler);
+
+    expect(slashBuilderSpy).toHaveBeenCalledOnce();
+    expect(userBuilderSpy).toHaveBeenCalledOnce();
+
+    expect(discord.getChatInputCommandMap().get("test")?.payload).toMatchObject({
+      type: ApplicationCommandType.ChatInput,
+      description: "AA",
+      name: "test"
+    } satisfies RESTPostAPIApplicationCommandsJSONBody);
+
+    expect(discord.getUserCommandMap().get("test2")?.payload).toMatchObject({
+      type: ApplicationCommandType.User,
+      name: "test2"
+    } satisfies RESTPostAPIApplicationCommandsJSONBody);
+  });
+
+  it("getRegisterObject() で登録したコマンドを取得できる", () => {
+    const handler = vi.fn();
+    discord.command("ChatInput", "test", (b) => b.setName("test").setDescription("AA"), handler);
+
+    const registerObject = discord.getRegisterObject();
+    expect(registerObject.global).toEqual([
+      {
+        type: ApplicationCommandType.ChatInput,
+        description: "AA",
+        name: "test",
+        contexts: undefined,
+        default_permission: undefined,
+        default_member_permissions: undefined,
+        description_localizations: undefined,
+        dm_permission: undefined,
+        integration_types: undefined,
+        name_localizations: undefined,
+        nsfw: undefined,
+        options: []
+      } satisfies RESTPostAPIApplicationCommandsJSONBody
+    ]);
   });
 });

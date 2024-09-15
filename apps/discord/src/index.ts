@@ -14,11 +14,10 @@ const app = honoFactory
 
     const requestId = c.get("requestId");
     console.error(`app.onError: ${e.message} (requestId: ${requestId})`);
-    return c.text("Internal Server Error", 500, { "X-Request-Id": requestId });
+    return c.text("Internal Server Error", 500);
   })
   .get("/", (c) => {
-    const requestId = c.get("requestId");
-    return c.text("Hello, World!", 200, { "X-Request-Id": requestId });
+    return c.text("Hello, World!");
   });
 
 app.post("/interactions", verifyDiscordInteraction, async (c) => {

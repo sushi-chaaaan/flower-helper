@@ -1,1 +1,1 @@
-export type MaybePromise<T> = Awaited<T> | Promise<Awaited<T>>;
+export type MaybePromise<T> = T | Promise<T> | PromiseLike<T>;

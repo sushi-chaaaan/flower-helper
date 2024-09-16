@@ -1,27 +1,11 @@
+import { ApplicationCommandType, InteractionContextType } from "discord-api-types/v10";
 import { afterEach, describe, expect, it, vi } from "vitest";
-
-import {} from "@discordjs/builders";
-import { ApplicationCommandType, type RESTPostAPIApplicationCommandsJSONBody } from "discord-api-types/v10";
-import * as DiscordCommand from "./index";
-
 import * as commandBuilder from "../builder/command";
-
-class DiscordCommandTest extends DiscordCommand.DiscordCommand {
-  getChatInputCommandMap() {
-    return this.chatInputCommandMap;
-  }
-
-  getMessageCommandMap() {
-    return this.messageCommandMap;
-  }
-
-  getUserCommandMap() {
-    return this.userCommandMap;
-  }
-}
+import * as DiscordCommand from "./index";
+import type { ApplicationCommandRegisterObject } from "./interface";
 
 describe("DiscordCommand", () => {
-  const discord = new DiscordCommandTest();
+  const discord = new DiscordCommand.DiscordCommand();
   const slashBuilderSpy = vi.spyOn(commandBuilder, "getSlashCommandBuilder");
   const userBuilderSpy = vi.spyOn(commandBuilder, "getUserContextMenuCommandBuilder");
   const messageBuilderSpy = vi.spyOn(commandBuilder, "getMessageContextMenuCommandBuilder");
@@ -33,114 +17,167 @@ describe("DiscordCommand", () => {
     discord.clear();
   });
 
-  describe(".command()", () => {
+  describe("コマンド登録", () => {
     it("ChatInputApplicationCommand を登録できる", () => {
       const handler = vi.fn();
-      discord.command("ChatInput", { name: "test", description: "I AM DESCRIPTION" }, (b) => b, handler);
 
-      // コマンドPayloadの生成にはSlashCommandBuilderが使われる
+      discord.command("ChatInput", { name: "test", description: "I AM DESCRIPTION" }, (b) => b.setNSFW(true), handler);
+
+      // ChatInputコマンドPayloadの生成にはSlashCommandBuilderが使われる
       expect(slashBuilderSpy).toHaveBeenCalledOnce();
-
-      expect(discord.getChatInputCommandMap().get("test")?.payload).toMatchObject({
-        type: ApplicationCommandType.ChatInput,
-        description: "I AM DESCRIPTION",
-        name: "test"
-      } satisfies RESTPostAPIApplicationCommandsJSONBody);
+      expect(discord.getRegisterObject()).toEqual({
+        global: [
+          {
+            type: ApplicationCommandType.ChatInput,
+            description: "I AM DESCRIPTION",
+            name: "test",
+            contexts: undefined,
+            default_member_permissions: undefined,
+            description_localizations: undefined,
+            handler: undefined,
+            integration_types: undefined,
+            name_localizations: undefined,
+            nsfw: true,
+            options: [],
+            default_permission: undefined,
+            dm_permission: undefined
+          }
+        ]
+      } satisfies ApplicationCommandRegisterObject);
     });
 
     it("MessageContextMenuApplicationCommand を登録できる", () => {
       const handler = vi.fn();
-      discord.command("Message", { name: "test" }, (b) => b, handler);
+
+      discord.command("Message", { name: "test" }, (b) => b.setContexts(InteractionContextType.Guild), handler);
 
       // コマンドPayloadの生成にはContextMenuCommandBuilderが使われる
       expect(messageBuilderSpy).toHaveBeenCalledOnce();
-
-      expect(discord.getMessageCommandMap().get("test")?.payload).toMatchObject({
-        type: ApplicationCommandType.Message,
-        name: "test"
-      } satisfies RESTPostAPIApplicationCommandsJSONBody);
+      expect(discord.getRegisterObject()).toEqual({
+        global: [
+          {
+            type: ApplicationCommandType.Message,
+            name: "test",
+            contexts: [InteractionContextType.Guild],
+            default_member_permissions: undefined,
+            integration_types: undefined,
+            name_localizations: undefined,
+            default_permission: undefined,
+            dm_permission: undefined
+          }
+        ]
+      } satisfies ApplicationCommandRegisterObject);
     });
 
     it("UserContextMenuApplicationCommand を登録できる", () => {
       const handler = vi.fn();
+
       discord.command("User", { name: "test" }, (b) => b, handler);
 
       // コマンドPayloadの生成にはContextMenuCommandBuilderが使われる
       expect(userBuilderSpy).toHaveBeenCalledOnce();
-
-      expect(discord.getUserCommandMap().get("test")?.payload).toMatchObject({
-        type: ApplicationCommandType.User,
-        name: "test"
-      });
+      expect(discord.getRegisterObject()).toEqual({
+        global: [
+          {
+            type: ApplicationCommandType.User,
+            name: "test",
+            contexts: undefined,
+            default_member_permissions: undefined,
+            integration_types: undefined,
+            name_localizations: undefined,
+            default_permission: undefined,
+            dm_permission: undefined
+          }
+        ]
+      } satisfies ApplicationCommandRegisterObject);
     });
 
     it("任意のコマンドを2つ以上登録できる", () => {
       const handler = vi.fn();
+
       discord.command("ChatInput", { name: "test", description: "AA" }, (b) => b, handler).command("User", { name: "test2" }, (b) => b, handler);
 
-      expect(slashBuilderSpy).toHaveBeenCalledOnce();
-      expect(userBuilderSpy).toHaveBeenCalledOnce();
-
-      expect(discord.getChatInputCommandMap().get("test")?.payload).toMatchObject({
-        type: ApplicationCommandType.ChatInput,
-        description: "AA",
-        name: "test"
-      });
-
-      expect(discord.getUserCommandMap().get("test2")?.payload).toMatchObject({
-        type: ApplicationCommandType.User,
-        name: "test2"
-      });
+      expect(discord.getRegisterObject()).toEqual({
+        global: [
+          {
+            type: ApplicationCommandType.ChatInput,
+            description: "AA",
+            name: "test",
+            contexts: undefined,
+            default_member_permissions: undefined,
+            description_localizations: undefined,
+            handler: undefined,
+            integration_types: undefined,
+            name_localizations: undefined,
+            nsfw: undefined,
+            options: [],
+            default_permission: undefined,
+            dm_permission: undefined
+          },
+          {
+            type: ApplicationCommandType.User,
+            name: "test2",
+            contexts: undefined,
+            default_member_permissions: undefined,
+            integration_types: undefined,
+            name_localizations: undefined,
+            default_permission: undefined,
+            dm_permission: undefined
+          }
+        ]
+      } satisfies ApplicationCommandRegisterObject);
     });
 
     it("任意のコマンド登録において第3引数のbodyは省略可能である", () => {
       const handler = vi.fn();
-      discord
-        .command("ChatInput", { name: "test", description: "AA" }, handler)
-        .command("Message", { name: "test2" }, handler)
-        .command("User", { name: "test3" }, handler);
+      discord.command("ChatInput", { name: "test", description: "AA" }, handler);
 
-      expect(slashBuilderSpy).toHaveBeenCalledOnce();
-      expect(userBuilderSpy).toHaveBeenCalledOnce();
-      expect(messageBuilderSpy).toHaveBeenCalledOnce();
-      expect(discord.getChatInputCommandMap().get("test")?.payload).toMatchObject({
-        type: ApplicationCommandType.ChatInput,
-        description: "AA",
-        name: "test"
-      });
-      expect(discord.getMessageCommandMap().get("test2")?.payload).toMatchObject({
-        type: ApplicationCommandType.Message,
-        name: "test2"
-      });
-      expect(discord.getUserCommandMap().get("test3")?.payload).toMatchObject({
-        type: ApplicationCommandType.User,
-        name: "test3"
-      });
+      expect(discord.getRegisterObject()).toEqual({
+        global: [
+          {
+            type: ApplicationCommandType.ChatInput,
+            description: "AA",
+            name: "test",
+            contexts: undefined,
+            default_member_permissions: undefined,
+            description_localizations: undefined,
+            handler: undefined,
+            integration_types: undefined,
+            name_localizations: undefined,
+            nsfw: undefined,
+            options: [],
+            default_permission: undefined,
+            dm_permission: undefined
+          }
+        ]
+      } satisfies ApplicationCommandRegisterObject);
     });
   });
 
-  describe(".getRegisterObject()", () => {
+  describe("登録したコマンドの取得", () => {
     it("登録したコマンドを取得できる", () => {
       const handler = vi.fn();
+
       discord.command("ChatInput", { name: "test", description: "AA" }, handler);
 
-      const registerObject = discord.getRegisterObject();
-      expect(registerObject.global).toEqual([
-        {
-          type: ApplicationCommandType.ChatInput,
-          description: "AA",
-          name: "test",
-          contexts: undefined,
-          default_permission: undefined,
-          default_member_permissions: undefined,
-          description_localizations: undefined,
-          dm_permission: undefined,
-          integration_types: undefined,
-          name_localizations: undefined,
-          nsfw: undefined,
-          options: []
-        } satisfies RESTPostAPIApplicationCommandsJSONBody
-      ]);
+      expect(discord.getRegisterObject()).toEqual({
+        global: [
+          {
+            type: ApplicationCommandType.ChatInput,
+            description: "AA",
+            name: "test",
+            contexts: undefined,
+            default_permission: undefined,
+            default_member_permissions: undefined,
+            description_localizations: undefined,
+            dm_permission: undefined,
+            integration_types: undefined,
+            name_localizations: undefined,
+            nsfw: undefined,
+            options: []
+          }
+        ]
+      } satisfies ApplicationCommandRegisterObject);
     });
   });
 });

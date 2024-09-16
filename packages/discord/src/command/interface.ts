@@ -7,7 +7,6 @@ import type {
   RESTPutAPIApplicationCommandsJSONBody
 } from "discord-api-types/v10";
 import type { MessageContextMenuCommandBuilderArgs, SlashCommandBuilderArgs, UserContextMenuCommandBuilderArgs } from "../builder/command";
-import type {} from "../helper/interaction/types";
 import type { CommandType } from "../types/command";
 import type { MaybePromise } from "../utils/types/promise";
 

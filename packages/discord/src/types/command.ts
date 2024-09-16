@@ -1,6 +1,3 @@
-const COMMAND_TYPE = ["ChatInput", "User", "Message"] as const;
-export type CommandType = (typeof COMMAND_TYPE)[number];
-
 import type {
   APIChatInputApplicationCommandInteraction,
   APIInteractionResponse,
@@ -9,6 +6,9 @@ import type {
   RESTPostAPIApplicationCommandsJSONBody
 } from "discord-api-types/v10";
 import type { MaybePromise } from "../utils/types/promise";
+
+const COMMAND_TYPE = ["ChatInput", "User", "Message"] as const;
+export type CommandType = (typeof COMMAND_TYPE)[number];
 
 type ApplicationCommandBase = {
   payload: RESTPostAPIApplicationCommandsJSONBody;

@@ -16,7 +16,6 @@ import {
   getUserContextMenuCommandBuilder
 } from "../builder/command";
 import { isMessageApplicationCommandInteraction, isUserApplicationCommandInteraction } from "../helper/interaction/guard";
-import type {} from "../helper/interaction/types";
 import type { ChatInputApplicationCommand, CommandType, MessageApplicationCommand, UserApplicationCommand } from "../types/command";
 import type { MaybePromise } from "../utils/types/promise";
 import type { ApplicationCommandRegisterObject, IDiscordCommand } from "./interface";

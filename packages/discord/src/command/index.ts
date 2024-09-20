@@ -1,11 +1,21 @@
-import type { ContextMenuCommandBuilder, SlashCommandBuilder } from "@discordjs/builders";
-import { isChatInputApplicationCommandInteraction } from "discord-api-types/utils/v10";
 import type {
-  APIApplicationCommandInteraction,
-  APIChatInputApplicationCommandInteraction,
-  APIInteractionResponse,
-  APIMessageApplicationCommandInteraction,
-  APIUserApplicationCommandInteraction
+  ContextMenuCommandBuilder,
+  SlashCommandBuilder,
+  SlashCommandOptionsOnlyBuilder,
+  SlashCommandSubcommandBuilder,
+  SlashCommandSubcommandGroupBuilder,
+  SlashCommandSubcommandsOnlyBuilder
+} from "@discordjs/builders";
+import { isChatInputApplicationCommandInteraction } from "discord-api-types/utils/v10";
+import {
+  type APIApplicationCommandAutocompleteInteraction,
+  type APIApplicationCommandAutocompleteResponse,
+  type APIApplicationCommandInteraction,
+  type APIChatInputApplicationCommandInteraction,
+  type APIInteractionResponse,
+  type APIMessageApplicationCommandInteraction,
+  type APIUserApplicationCommandInteraction,
+  InteractionResponseType
 } from "discord-api-types/v10";
 import {
   type MessageContextMenuCommandBuilderArgs,
@@ -34,7 +44,14 @@ class DiscordCommand implements IDiscordCommand {
   command(
     type: "ChatInput",
     params: SlashCommandBuilderArgs,
-    body: (builder: SlashCommandBuilder) => SlashCommandBuilder,
+    body: (
+      builder: SlashCommandBuilder
+    ) =>
+      | SlashCommandBuilder
+      | SlashCommandOptionsOnlyBuilder
+      | SlashCommandSubcommandBuilder
+      | SlashCommandSubcommandGroupBuilder
+      | SlashCommandSubcommandsOnlyBuilder,
     handler: (interaction: APIChatInputApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
   ): this;
 
@@ -132,6 +149,17 @@ class DiscordCommand implements IDiscordCommand {
     return interaction satisfies never;
   }
 
+  protected async handleApplicationCommandAutocomplete(
+    interaction: APIApplicationCommandAutocompleteInteraction
+  ): Promise<APIApplicationCommandAutocompleteResponse> {
+    return {
+      type: InteractionResponseType.ApplicationCommandAutocompleteResult,
+      data: {
+        choices: []
+      }
+    };
+  }
+
   /**
    * Discordにコマンドを登録するためのPayloadを取得する。
    */
@@ -141,29 +169,6 @@ class DiscordCommand implements IDiscordCommand {
     const userCommands = [...this.userCommandMap.values()].map(({ payload }) => payload);
 
     return { global: [...chatInputCommands, ...messageCommands, ...userCommands] };
-  }
-
-  /**
-   * 登録されたコマンドを全て削除する。テストで使うと便利。
-   *
-   * @example
-   * ```typescript
-   * import { describe, afterEach } from "vitest";
-   *
-   * describe("DiscordCommand", () => {
-   *  const discord = new DiscordCommand();
-   *
-   *  afterEach(() => {
-   *   discord.clear();
-   *  });
-   *
-   *  // test cases
-   * })
-   */
-  clear(): void {
-    this.chatInputCommandMap.clear();
-    this.messageCommandMap.clear();
-    this.userCommandMap.clear();
   }
 }
 

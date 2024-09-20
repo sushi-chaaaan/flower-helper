@@ -1,4 +1,11 @@
-import type { ContextMenuCommandBuilder, SlashCommandBuilder } from "@discordjs/builders";
+import type {
+  ContextMenuCommandBuilder,
+  SlashCommandBuilder,
+  SlashCommandOptionsOnlyBuilder,
+  SlashCommandSubcommandBuilder,
+  SlashCommandSubcommandGroupBuilder,
+  SlashCommandSubcommandsOnlyBuilder
+} from "@discordjs/builders";
 import type {
   APIChatInputApplicationCommandInteraction,
   APIInteractionResponse,
@@ -18,7 +25,14 @@ export interface IDiscordCommand {
   command(
     type: "ChatInput",
     params: SlashCommandBuilderArgs,
-    body: (builder: SlashCommandBuilder) => SlashCommandBuilder,
+    body: (
+      builder: SlashCommandBuilder
+    ) =>
+      | SlashCommandBuilder
+      | SlashCommandOptionsOnlyBuilder
+      | SlashCommandSubcommandBuilder
+      | SlashCommandSubcommandGroupBuilder
+      | SlashCommandSubcommandsOnlyBuilder,
     handler: (interaction: APIChatInputApplicationCommandInteraction) => MaybePromise<APIInteractionResponse>
   ): this;
 
@@ -65,6 +79,4 @@ export interface IDiscordCommand {
   ): this;
 
   getRegisterObject(): ApplicationCommandRegisterObject;
-
-  clear(): void;
 }

@@ -14,6 +14,12 @@ class Discord extends DiscordCommand implements IDiscordBase {
     switch (interaction.type) {
       case InteractionType.ApplicationCommand:
         return await this.handleApplicationCommand(interaction);
+      case InteractionType.ApplicationCommandAutocomplete:
+        return await this.handleApplicationCommandAutocomplete(interaction);
+      case InteractionType.MessageComponent:
+        return await this.handleMessageComponent(interaction);
+      case InteractionType.ModalSubmit:
+        return await this.handleModalSubmit(interaction);
       default:
         return interaction satisfies never;
     }

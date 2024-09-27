@@ -8,6 +8,9 @@ compatibility_flags = [ "nodejs_compat" ]
 [vars]
 NODE_VERSION = "20.15"
 
+[observability]
+enabled = true
+
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

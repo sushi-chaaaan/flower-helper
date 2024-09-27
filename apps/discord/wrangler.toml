@@ -1,7 +1,12 @@
+#:schema node_modules/wrangler/config-schema.json
+
 name = "flower-helper-discord"
 main = "./src/index.ts"
-compatibility_date = "2024-09-09"
+compatibility_date = "2024-09-26"
 compatibility_flags = [ "nodejs_compat" ]
+
+[vars]
+NODE_VERSION = "20.15"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
